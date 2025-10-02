@@ -1,0 +1,89 @@
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { useToast } from "@/hooks/use-toast";
+import { Card } from "@/components/ui/card";
+
+export const ContactForm = () => {
+  const { toast } = useToast();
+  const [formData, setFormData] = useState({
+    contactName: "",
+    businessName: "",
+    telephone: "",
+    email: "",
+  });
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    toast({
+      title: "Quote Request Received!",
+      description: "We'll contact you within 24 hours to discuss your campaign.",
+    });
+    setFormData({ contactName: "", businessName: "", telephone: "", email: "" });
+  };
+
+  return (
+    <Card className="p-8 bg-card border-border max-w-2xl mx-auto">
+      <form onSubmit={handleSubmit} className="space-y-6">
+        <div className="grid md:grid-cols-2 gap-6">
+          <div className="space-y-2">
+            <Label htmlFor="contactName">Contact Name *</Label>
+            <Input
+              id="contactName"
+              required
+              value={formData.contactName}
+              onChange={(e) =>
+                setFormData({ ...formData, contactName: e.target.value })
+              }
+              className="bg-background"
+            />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="businessName">Business Name *</Label>
+            <Input
+              id="businessName"
+              required
+              value={formData.businessName}
+              onChange={(e) =>
+                setFormData({ ...formData, businessName: e.target.value })
+              }
+              className="bg-background"
+            />
+          </div>
+        </div>
+        <div className="grid md:grid-cols-2 gap-6">
+          <div className="space-y-2">
+            <Label htmlFor="telephone">Telephone *</Label>
+            <Input
+              id="telephone"
+              type="tel"
+              required
+              value={formData.telephone}
+              onChange={(e) =>
+                setFormData({ ...formData, telephone: e.target.value })
+              }
+              className="bg-background"
+            />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="email">Email *</Label>
+            <Input
+              id="email"
+              type="email"
+              required
+              value={formData.email}
+              onChange={(e) =>
+                setFormData({ ...formData, email: e.target.value })
+              }
+              className="bg-background"
+            />
+          </div>
+        </div>
+        <Button type="submit" size="lg" className="w-full">
+          Request Free Quote
+        </Button>
+      </form>
+    </Card>
+  );
+};
