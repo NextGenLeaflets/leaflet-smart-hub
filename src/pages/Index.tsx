@@ -67,19 +67,19 @@ const Index = () => {
 
           {/* Icon Row */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16 max-w-4xl mx-auto">
-            {[
-              { icon: Target, label: "Targeted Delivery" },
-              { icon: MapPin, label: "GPS-Tracked" },
-              { icon: Palette, label: "Design & Print" },
-              { icon: BarChart3, label: "Measurable Results" },
-            ].map((item) => (
-              <div key={item.label} className="flex flex-col items-center gap-3">
-                <div className="p-4 rounded-full bg-white/10 backdrop-blur-sm">
-                  <item.icon className="w-8 h-8 text-white" />
-                </div>
-                <span className="text-sm font-medium">{item.label}</span>
+          {[
+            { icon: Target, label: "Targeted Delivery", color: "text-accent" },
+            { icon: MapPin, label: "GPS-Tracked", color: "text-primary" },
+            { icon: Palette, label: "Design & Print", color: "text-accent" },
+            { icon: BarChart3, label: "Measurable Results", color: "text-primary" },
+          ].map((item) => (
+            <div key={item.label} className="flex flex-col items-center gap-3">
+              <div className="p-4 rounded-full bg-white/10 backdrop-blur-sm">
+                <item.icon className={`w-8 h-8 ${item.color}`} />
               </div>
-            ))}
+              <span className="text-sm font-medium text-white">{item.label}</span>
+            </div>
+          ))}
           </div>
         </div>
       </section>
