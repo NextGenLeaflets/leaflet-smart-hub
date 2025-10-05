@@ -391,7 +391,7 @@ const Index = () => {
           <div className="mt-12 text-center space-y-3">
             <div className="flex items-center justify-center gap-2 text-muted-foreground">
               <MapPinned className="w-5 h-5 text-primary" />
-              <span>Serving Paisley & Glasgow</span>
+              <span>Serving London & Glasgow</span>
             </div>
             <div className="flex items-center justify-center gap-2 text-muted-foreground">
               <Phone className="w-5 h-5 text-accent" />

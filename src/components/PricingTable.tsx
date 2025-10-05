@@ -12,17 +12,17 @@ const packages = [
   {
     name: "Standard",
     includes: "Basic package + Leaflet design + High-quality printing + QR code tracking + campaign report",
-    solo: "£169 (design + 1,000 solo)",
-    shared: "£139 (design + 1,000 shared)",
-    extra: "£65 Solo / £55 Shared per 1,000",
+    solo: "£169 / 1,000",
+    shared: "£139 / 1,000",
+    extra: "£75 Solo, £65 Shared",
     featured: true,
   },
   {
     name: "Premium",
     includes: "Standard package + email retargeting",
-    solo: "£279 / campaign (solo)",
-    shared: "£219 / campaign (shared)",
-    extra: "£75 Solo / £65 Shared per 1,000",
+    solo: "£279 / 1,000",
+    shared: "£219 / 1,000",
+    extra: "£75 Solo, £65 Shared",
   },
 ];
 
