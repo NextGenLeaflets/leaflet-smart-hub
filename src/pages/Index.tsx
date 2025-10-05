@@ -49,9 +49,7 @@ const Index = () => {
             Leaflet marketing with GPS & QR tracking, email targeting, and results you can measure.
           </h2>
           <p className="text-lg md:text-xl mb-8 max-w-3xl mx-auto leading-relaxed text-white/80">
-            NextGen Leaflets combines trusted distribution methods with modern digital tracking.
-            Whether you want your leaflet delivered solo or in a shared round, we ensure your
-            campaign reaches the right people and generates measurable results.
+            NextGen Leaflets combines trusted distribution methods with modern digital tracking and online retargeting. We ensure your campaign reaches the right people and generates measurable results.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button
@@ -127,7 +125,7 @@ const Index = () => {
               icon={Navigation}
               iconColor="text-primary"
               title="Leaflet Distribution"
-              description="GPS-tracked, targeted delivery to ensure your leaflets reach the right hands."
+              description="GPS-tracked & targeted delivery to ensure your leaflets reach the right hands."
             />
             <ServiceCard
               icon={Palette}
@@ -277,10 +275,6 @@ const Index = () => {
               quote="The QR code tracking and email follow-ups made a big difference — we could see who was engaging with our offer. We'll definitely use NextGen Leaflets again."
               author="🏋️‍♂️ Gym & Fitness Studio – Glasgow City Centre"
             />
-            <TestimonialCard
-              quote="We ran a leaflet drop before our anniversary sale and were amazed at the turnout. People even mentioned the leaflet at checkout! The design and delivery were top-notch."
-              author="🍞 Local Bakery – Johnstone"
-            />
           </div>
         </div>
       </section>
@@ -396,17 +390,17 @@ const Index = () => {
 
           <div className="mt-12 text-center space-y-3">
             <div className="flex items-center justify-center gap-2 text-muted-foreground">
-              <MapPinned className="w-5 h-5" />
+              <MapPinned className="w-5 h-5 text-primary" />
               <span>Serving Paisley & Glasgow</span>
             </div>
             <div className="flex items-center justify-center gap-2 text-muted-foreground">
-              <Phone className="w-5 h-5" />
+              <Phone className="w-5 h-5 text-accent" />
               <a href="tel:07852555010" className="hover:text-primary transition-colors">
                 07852555010
               </a>
             </div>
             <div className="flex items-center justify-center gap-2 text-muted-foreground">
-              <Mail className="w-5 h-5" />
+              <Mail className="w-5 h-5 text-primary" />
               <a
                 href="mailto:omer@nextgenleaflets.co.uk"
                 className="hover:text-primary transition-colors"

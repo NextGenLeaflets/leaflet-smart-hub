@@ -4,25 +4,25 @@ import { Button } from "@/components/ui/button";
 const packages = [
   {
     name: "Basic",
-    includes: "GPS-tracked distribution + campaign report",
-    solo: "From £65 / 1,000",
-    shared: "From £55 / 1,000",
-    extra: "+£40 per 1,000",
+    includes: "Your Leaflet GPS-tracked distributed + Campaign report",
+    solo: "£65 / 1,000",
+    shared: "£55 / 1,000",
+    extra: "",
   },
   {
     name: "Standard",
     includes: "Basic package + Leaflet design + High-quality printing + QR code tracking + campaign report",
-    solo: "From £169 (design + 1,000 solo)",
-    shared: "From £139 (design + 1,000 shared)",
-    extra: "+£55 per 1,000",
+    solo: "£169 (design + 1,000 solo)",
+    shared: "£139 (design + 1,000 shared)",
+    extra: "£65 Solo / £55 Shared per 1,000",
     featured: true,
   },
   {
     name: "Premium",
     includes: "Standard package + email retargeting",
-    solo: "From £279 / campaign (solo)",
-    shared: "From £219 / campaign (shared)",
-    extra: "+£75 per 1,000",
+    solo: "£279 / campaign (solo)",
+    shared: "£219 / campaign (shared)",
+    extra: "£75 Solo / £65 Shared per 1,000",
   },
 ];
 
@@ -64,12 +64,14 @@ export const PricingTable = () => {
               </p>
               <p className="text-lg font-semibold text-foreground">{pkg.shared}</p>
             </div>
-            <div>
-              <p className="text-xs text-muted-foreground uppercase tracking-wide mb-1">
-                Extra 1,000 Leaflets
-              </p>
-              <p className="text-lg font-semibold text-foreground">{pkg.extra}</p>
-            </div>
+            {pkg.extra && (
+              <div>
+                <p className="text-xs text-muted-foreground uppercase tracking-wide mb-1">
+                  Extra 1,000 Leaflets
+                </p>
+                <p className="text-lg font-semibold text-foreground">{pkg.extra}</p>
+              </div>
+            )}
           </div>
           <Button
             onClick={scrollToContact}
