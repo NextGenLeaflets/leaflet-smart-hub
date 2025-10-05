@@ -22,10 +22,10 @@ export const ContactForm = () => {
 
     emailjs
       .send(
-        "your_service_id",
-        "your_template_id",
+        "service_i1n9eco",
+        "template_55rqcbj",
         formData,
-        "your_public_key"
+        "TocRjHZ71Qk5MOTfH"
       )
       .then(
         () => {
