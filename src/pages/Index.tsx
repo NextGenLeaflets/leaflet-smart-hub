@@ -292,7 +292,7 @@ const Index = () => {
                   What areas do you cover?
                 </AccordionTrigger>
                 <AccordionContent className="text-muted-foreground">
-                  We specialise in Paisley and Glasgow, offering reliable local distribution across all nearby neighbourhoods.
+                  We specialise in London and Glasgow, offering reliable local distribution across all nearby neighbourhoods.
                 </AccordionContent>
               </AccordionItem>
 
