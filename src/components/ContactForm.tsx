@@ -18,11 +18,43 @@ export const ContactForm = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    const subject = encodeURIComponent(
+      `Quote Request from ${formData.businessName}`
+    );
+    const body = encodeURIComponent(
+      `Contact Name: ${formData.contactName}\n` +
+      `Business Name: ${formData.businessName}\n` +
+      `Telephone: ${formData.telephone}\n` +
+      `Email: ${formData.email}\n\n` +
+      `Message:\n${formData.message}`
+    );
+
+    // your target email address
+    const recipient = "your@email.com";
+
+    const mailtoLink = `mailto:${recipient}?subject=${subject}&body=${body}`;
+
+    // show toast feedback
     toast({
-      title: "Quote Request Received!",
-      description: "We'll contact you within 24 hours to discuss your campaign.",
+      title: "Quote Request Ready!",
+      description:
+        "Your mail app will open shortly. Send the email to complete your quote request.",
     });
-    setFormData({ contactName: "", businessName: "", telephone: "", email: "", message: "" });
+
+    // open user's mail app after a short delay to let toast show
+    setTimeout(() => {
+      window.location.href = mailtoLink;
+    }, 800);
+
+    // reset form fields
+    setFormData({
+      contactName: "",
+      businessName: "",
+      telephone: "",
+      email: "",
+      message: "",
+    });
   };
 
   return (
@@ -54,6 +86,7 @@ export const ContactForm = () => {
             />
           </div>
         </div>
+
         <div className="grid md:grid-cols-2 gap-6">
           <div className="space-y-2">
             <Label htmlFor="telephone">Telephone *</Label>
@@ -82,6 +115,7 @@ export const ContactForm = () => {
             />
           </div>
         </div>
+
         <div className="space-y-2">
           <Label htmlFor="message">Message *</Label>
           <Textarea
@@ -95,6 +129,7 @@ export const ContactForm = () => {
             placeholder="Tell us about your campaign requirements..."
           />
         </div>
+
         <Button type="submit" size="lg" className="w-full">
           Request Free Quote
         </Button>
