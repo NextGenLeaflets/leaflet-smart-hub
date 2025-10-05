@@ -1,9 +1,10 @@
+import emailjs from "emailjs-com";
+import { useToast } from "@/hooks/use-toast"; // keep your toast
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { useToast } from "@/hooks/use-toast";
 import { Card } from "@/components/ui/card";
 
 export const ContactForm = () => {
@@ -19,47 +20,41 @@ export const ContactForm = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    const subject = encodeURIComponent(
-      `Quote Request from ${formData.businessName}`
-    );
-    const body = encodeURIComponent(
-      `Contact Name: ${formData.contactName}\n` +
-      `Business Name: ${formData.businessName}\n` +
-      `Telephone: ${formData.telephone}\n` +
-      `Email: ${formData.email}\n\n` +
-      `Message:\n${formData.message}`
-    );
-
-    // your target email address
-    const recipient = "your@email.com";
-
-    const mailtoLink = `mailto:${recipient}?subject=${subject}&body=${body}`;
-
-    // show toast feedback
-    toast({
-      title: "Quote Request Ready!",
-      description:
-        "Your mail app will open shortly. Send the email to complete your quote request.",
-    });
-
-    // open user's mail app after a short delay to let toast show
-    setTimeout(() => {
-      window.location.href = mailtoLink;
-    }, 800);
-
-    // reset form fields
-    setFormData({
-      contactName: "",
-      businessName: "",
-      telephone: "",
-      email: "",
-      message: "",
-    });
+    emailjs
+      .send(
+        "your_service_id",
+        "your_template_id",
+        formData,
+        "your_public_key"
+      )
+      .then(
+        () => {
+          toast({
+            title: "Message sent!",
+            description: "We'll contact you within 24 hours.",
+          });
+          setFormData({
+            contactName: "",
+            businessName: "",
+            telephone: "",
+            email: "",
+            message: "",
+          });
+        },
+        (error) => {
+          toast({
+            title: "Failed to send",
+            description: "Please try again later.",
+          });
+          console.error("Email send error:", error);
+        }
+      );
   };
 
   return (
     <Card className="p-8 bg-card border-border max-w-2xl mx-auto">
       <form onSubmit={handleSubmit} className="space-y-6">
+        {/* your existing inputs */}
         <div className="grid md:grid-cols-2 gap-6">
           <div className="space-y-2">
             <Label htmlFor="contactName">Contact Name *</Label>
