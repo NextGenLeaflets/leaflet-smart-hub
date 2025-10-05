@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 import { Card } from "@/components/ui/card";
@@ -12,6 +13,7 @@ export const ContactForm = () => {
     businessName: "",
     telephone: "",
     email: "",
+    message: "",
   });
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -20,7 +22,7 @@ export const ContactForm = () => {
       title: "Quote Request Received!",
       description: "We'll contact you within 24 hours to discuss your campaign.",
     });
-    setFormData({ contactName: "", businessName: "", telephone: "", email: "" });
+    setFormData({ contactName: "", businessName: "", telephone: "", email: "", message: "" });
   };
 
   return (
@@ -79,6 +81,19 @@ export const ContactForm = () => {
               className="bg-background"
             />
           </div>
+        </div>
+        <div className="space-y-2">
+          <Label htmlFor="message">Message *</Label>
+          <Textarea
+            id="message"
+            required
+            value={formData.message}
+            onChange={(e) =>
+              setFormData({ ...formData, message: e.target.value })
+            }
+            className="bg-background min-h-[120px]"
+            placeholder="Tell us about your campaign requirements..."
+          />
         </div>
         <Button type="submit" size="lg" className="w-full">
           Request Free Quote
