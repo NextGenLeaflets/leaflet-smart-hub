@@ -5,16 +5,16 @@ const packages = [
   {
     name: "Basic",
     includes: "Your Leaflet GPS-tracked distributed + Campaign report",
-    solo: "£65 / 1,000",
+    solo: "£75 / 1,000",
     shared: "£55 / 1,000",
     extra: "",
   },
   {
     name: "Standard",
     includes: "Basic package + Leaflet design + High-quality printing + QR code tracking + campaign report",
-    solo: "£169 / 1,000",
-    shared: "£139 / 1,000",
-    extra: "£75 Solo, £65 Shared",
+    solo: "£179 / 1,000",
+    shared: "£159 / 1,000",
+    extra: "£75 Solo, £55 Shared",
     featured: true,
   },
   {
@@ -22,7 +22,7 @@ const packages = [
     includes: "Standard package + email retargeting",
     solo: "£279 / 1,000",
     shared: "£219 / 1,000",
-    extra: "£75 Solo, £65 Shared",
+    extra: "£75 Solo, £55 Shared",
   },
 ];
 
