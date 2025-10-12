@@ -12,17 +12,19 @@ const packages = [
   {
     name: "Standard",
     includes: "Basic package + Leaflet design + High-quality printing + QR code tracking + campaign report",
-    solo: "£179 / 1,000",
-    shared: "£159 / 1,000",
-    extra: "£75 Solo, £55 Shared",
+    solo: "",
+    shared: "",
+    extra: "",
     featured: true,
+    quoteOnly: true,
   },
   {
     name: "Premium",
     includes: "Standard package + email retargeting",
-    solo: "£279 / 1,000",
-    shared: "£219 / 1,000",
-    extra: "£75 Solo, £55 Shared",
+    solo: "",
+    shared: "",
+    extra: "",
+    quoteOnly: true,
   },
 ];
 
@@ -52,25 +54,33 @@ export const PricingTable = () => {
             <p className="text-sm text-muted-foreground leading-relaxed">{pkg.includes}</p>
           </div>
           <div className="space-y-4 mb-6">
-            <div>
-              <p className="text-xs text-muted-foreground uppercase tracking-wide mb-1">
-                Solo Distribution
-              </p>
-              <p className="text-lg font-semibold text-foreground">{pkg.solo}</p>
-            </div>
-            <div>
-              <p className="text-xs text-muted-foreground uppercase tracking-wide mb-1">
-                Shared Distribution
-              </p>
-              <p className="text-lg font-semibold text-foreground">{pkg.shared}</p>
-            </div>
-            {pkg.extra && (
-              <div>
-                <p className="text-xs text-muted-foreground uppercase tracking-wide mb-1">
-                  Extra 1,000 Leaflets
-                </p>
-                <p className="text-lg font-semibold text-foreground">{pkg.extra}</p>
+            {pkg.quoteOnly ? (
+              <div className="text-center py-4">
+                <p className="text-xl font-bold text-accent">Request Free Quote</p>
               </div>
+            ) : (
+              <>
+                <div>
+                  <p className="text-xs text-muted-foreground uppercase tracking-wide mb-1">
+                    Solo Distribution
+                  </p>
+                  <p className="text-lg font-semibold text-foreground">{pkg.solo}</p>
+                </div>
+                <div>
+                  <p className="text-xs text-muted-foreground uppercase tracking-wide mb-1">
+                    Shared Distribution
+                  </p>
+                  <p className="text-lg font-semibold text-foreground">{pkg.shared}</p>
+                </div>
+                {pkg.extra && (
+                  <div>
+                    <p className="text-xs text-muted-foreground uppercase tracking-wide mb-1">
+                      Extra 1,000 Leaflets
+                    </p>
+                    <p className="text-lg font-semibold text-foreground">{pkg.extra}</p>
+                  </div>
+                )}
+              </>
             )}
           </div>
           <Button

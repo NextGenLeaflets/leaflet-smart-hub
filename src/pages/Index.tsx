@@ -37,11 +37,11 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       {/* Logo Header */}
       <header className="py-6 bg-background border-b border-border">
-        <div className="container mx-auto px-4">
+        <div className="w-full">
           <img 
             src={logo} 
             alt="NextGen Leaflets" 
-            className="h-16 md:h-20 mx-auto"
+            className="w-full h-24 md:h-32 object-contain"
           />
         </div>
       </header>
@@ -426,10 +426,17 @@ const Index = () => {
 
       {/* Footer */}
       <footer className="py-8 bg-primary text-primary-foreground">
-        <div className="container mx-auto px-4 text-center">
-          <p className="text-sm">
-            © {new Date().getFullYear()} NextGen Leaflets. All rights reserved.
-          </p>
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col items-center gap-4">
+            <img 
+              src={logo} 
+              alt="NextGen Leaflets" 
+              className="h-16 md:h-20"
+            />
+            <p className="text-sm">
+              © {new Date().getFullYear()} NextGen Leaflets. All rights reserved.
+            </p>
+          </div>
         </div>
       </footer>
     </div>
