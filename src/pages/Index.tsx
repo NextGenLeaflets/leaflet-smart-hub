@@ -22,6 +22,7 @@ import {
   MapPinned,
 } from "lucide-react";
 import heroImage from "@/assets/hero-leaflet-delivery.jpg";
+import logo from "@/assets/nextgen-logo.jpg";
 
 const Index = () => {
   const scrollToContact = () => {
@@ -34,6 +35,17 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      {/* Logo Header */}
+      <header className="py-6 bg-background border-b border-border">
+        <div className="container mx-auto px-4">
+          <img 
+            src={logo} 
+            alt="NextGen Leaflets" 
+            className="h-16 md:h-20 mx-auto"
+          />
+        </div>
+      </header>
+
       {/* Hero Section */}
       <section
         className="relative min-h-[90vh] flex items-center justify-center bg-cover bg-center"
