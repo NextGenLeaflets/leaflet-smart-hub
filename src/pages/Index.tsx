@@ -22,7 +22,11 @@ import {
   MapPinned,
 } from "lucide-react";
 import heroImage from "@/assets/hero-leaflet-delivery.jpg";
-import logo from "@/assets/nextgen-logo.jpg";
+import logo from "@/assets/nextgen-logo.png";
+import { useState } from "react";
+import logofooter from "@/assets/nextgen-logo-footer.png"
+import Navbar from "@/components/Navbar";
+
 
 const Index = () => {
   const scrollToContact = () => {
@@ -32,22 +36,15 @@ const Index = () => {
   const scrollToPricing = () => {
     document.getElementById("pricing")?.scrollIntoView({ behavior: "smooth" });
   };
+  
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Logo Header */}
-      <header className="py-6 bg-background border-b border-border">
-        <div className="w-full">
-          <img 
-            src={logo} 
-            alt="NextGen Leaflets" 
-            className="w-full h-24 md:h-32 object-contain"
-          />
-        </div>
-      </header>
+    <>
+      <Navbar />
 
       {/* Hero Section */}
       <section
+        id="hero"
         className="relative min-h-[90vh] flex items-center justify-center bg-cover bg-center"
         style={{
           backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${heroImage})`,
@@ -84,7 +81,7 @@ const Index = () => {
       </section>
 
       {/* Icon Row Section */}
-      <section className="py-12 bg-background">
+      <section id="features" className="py-12 bg-background">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
             {[
@@ -425,11 +422,11 @@ const Index = () => {
       </section>
 
       {/* Footer */}
-      <footer className="py-8 bg-primary text-primary-foreground">
+      <footer className="py-8 bg-foreground text-primary-foreground">
         <div className="container mx-auto px-4">
           <div className="flex flex-col items-center gap-4">
             <img 
-              src={logo} 
+              src={logofooter} 
               alt="NextGen Leaflets" 
               className="h-16 md:h-20"
             />
@@ -439,7 +436,7 @@ const Index = () => {
           </div>
         </div>
       </footer>
-    </div>
+    </>
   );
 };
 

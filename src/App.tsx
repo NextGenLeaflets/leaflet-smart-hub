@@ -29,6 +29,7 @@ const App = () => (
             content="Explore the future of digital leaflets and marketing content."
           />
           <meta property="og:type" content="website" />
+          
         </Helmet>
 
         <Routes>
