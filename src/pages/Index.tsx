@@ -1,443 +1,296 @@
+import { Link } from "react-router-dom";
+import {
+  ArrowRight,
+  BadgeCheck,
+  ClipboardList,
+  LineChart,
+  MessageSquare,
+  Search,
+  Sparkles,
+  Users,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { ServiceCard } from "@/components/ServiceCard";
-import { TestimonialCard } from "@/components/TestimonialCard";
-import { PricingTable } from "@/components/PricingTable";
-import { ContactForm } from "@/components/ContactForm";
+import { Card } from "@/components/ui/card";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import {
-  Target,
-  MapPin,
-  Palette,
-  BarChart3,
-  Navigation,
-  QrCode,
-  Mail,
-  Settings,
-  Phone,
-  MapPinned,
-} from "lucide-react";
-import heroImage from "@/assets/hero-leaflet-delivery.jpg";
-import logo from "@/assets/nextgen-logo.png";
-import { useState } from "react";
-import logofooter from "@/assets/nextgen-logo-footer.png"
-import Navbar from "@/components/Navbar";
+import { Seo } from "@/components/site/Seo";
+import { Section } from "@/components/site/Section";
+import { Reveal } from "@/components/site/Reveal";
+import { BRAND, BRAND_FAQS, INDUSTRIES, SERVICES } from "@/data/site";
+import heroImage from "@/assets/hero-creators.jpg";
+import catFood from "@/assets/cat-food.jpg";
+import catTravel from "@/assets/cat-travel.jpg";
+import catFitness from "@/assets/cat-fitness.jpg";
 
+const CATEGORY_CARDS = [
+  { title: "Food & Drink", slug: "food", image: catFood, copy: "Halal dining, recipes and food products." },
+  { title: "Travel", slug: "travel", image: catTravel, copy: "Muslim-friendly stays, cities and family trips." },
+  { title: "Fitness", slug: "fitness", image: catFitness, copy: "Gym, combat sports, running and nutrition." },
+];
 
-const Index = () => {
-  const scrollToContact = () => {
-    document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
-  };
+const STEPS = [
+  { icon: MessageSquare, title: "Tell us your goals", copy: "Objective, audience, location, timing and budget." },
+  { icon: Search, title: "We match creators", copy: "A shortlist built on relevance, not follower count." },
+  { icon: ClipboardList, title: "You approve", copy: "You review every creator and every brief before anything goes live." },
+  { icon: Sparkles, title: "Content goes live", copy: "We coordinate production, approvals and posting dates." },
+  { icon: LineChart, title: "You get reporting", copy: "Clear reporting against the metrics agreed up front." },
+];
 
-  const scrollToPricing = () => {
-    document.getElementById("pricing")?.scrollIntoView({ behavior: "smooth" });
-  };
-  
+const WHY = [
+  { title: "A specialist network", copy: "We focus on one ecosystem — UK Muslim lifestyle creators — instead of covering everything shallowly." },
+  { title: "Culturally aware briefs", copy: "We help you avoid tone-deaf messaging and get the calendar, language and context right." },
+  { title: "Relevance over reach", copy: "Nano and micro creators often outperform big accounts on trust and local impact." },
+  { title: "Fully managed delivery", copy: "Strategy, sourcing, negotiation, briefing, approvals, monitoring and reporting." },
+  { title: "Clear disclosure", copy: "Every paid or gifted collaboration is labelled as advertising, as UK rules require." },
+  { title: "Honest reporting", copy: "We report what the platforms and tracking actually measure — no invented numbers." },
+];
 
-  return (
-    <>
-      <Navbar />
+const Index = () => (
+  <>
+    <Seo
+      title="Muslim Creator Marketing Agency UK | Minara"
+      description="Minara connects UK brands with Muslim lifestyle creators across food, travel, fitness, family, fashion and beauty. Fully managed influencer campaigns and UGC."
+      path="/"
+      jsonLd={{
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        name: BRAND.full,
+        url: BRAND.url,
+        email: BRAND.email,
+        areaServed: "GB",
+        description:
+          "UK creator marketing agency connecting brands with Muslim lifestyle creators.",
+      }}
+    />
 
-      {/* Hero Section */}
-      <section
-        id="hero"
-        className="relative min-h-[90vh] flex items-center justify-center bg-cover bg-center"
-        style={{
-          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${heroImage})`,
-        }}
-      >
-        <div className="container mx-auto px-4 text-center text-white z-10">
-          <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
-            Smarter Leaflet Marketing for Local Businesses
+    {/* Hero */}
+    <section className="relative isolate overflow-hidden bg-primary text-primary-foreground">
+      <img
+        src={heroImage}
+        alt="Muslim lifestyle creators filming content in a studio setting"
+        className="absolute inset-0 h-full w-full object-cover opacity-35"
+        loading="eager"
+      />
+      <div className="absolute inset-0 bg-[var(--gradient-ink)] opacity-80" aria-hidden />
+      <div className="container relative mx-auto px-4 py-24 md:py-36">
+        <div className="max-w-3xl">
+          <p className="eyebrow">UK Muslim creator marketing</p>
+          <h1 className="mt-5 text-4xl font-extrabold leading-[1.05] md:text-6xl">
+            Reach Muslim consumers through creators they already trust.
           </h1>
-          <h2 className="text-2xl md:text-3xl mb-6 text-white/90">
-            Leaflet marketing with GPS & QR tracking, email targeting, and results you can measure.
-          </h2>
-          <p className="text-lg md:text-xl mb-8 max-w-3xl mx-auto leading-relaxed text-white/80">
-            NextGen Leaflets combines trusted distribution methods with modern digital tracking and online retargeting. We ensure your campaign reaches the right people and generates measurable results.
+          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-primary-foreground/80 md:text-xl">
+            {BRAND.name} is a UK creator marketing agency built around Muslim lifestyle audiences.
+            We match brands with the right creators across food, travel, fitness, family, modest
+            fashion, beauty and lifestyle — then run the campaign end to end.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="mt-9 flex flex-col gap-3 sm:flex-row">
             <Button
+              asChild
               size="lg"
-              onClick={scrollToContact}
-              className="text-lg px-8 py-6 bg-accent hover:bg-accent/90"
+              className="bg-accent text-accent-foreground hover:bg-accent/90"
             >
-              Request a Free Quote
+              <Link to="/start-a-campaign">
+                Start a Campaign <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
             </Button>
             <Button
+              asChild
               size="lg"
               variant="outline"
-              onClick={scrollToPricing}
-              className="text-lg px-8 py-6 bg-white/10 hover:bg-white/20 text-white border-white/30"
+              className="border-primary-foreground/30 bg-transparent text-primary-foreground hover:bg-primary-foreground/10"
             >
-              Learn About Our Packages
+              <Link to="/join-as-creator">Join as a Creator</Link>
             </Button>
           </div>
+          <div className="mt-10 flex flex-wrap gap-x-8 gap-y-3 text-sm text-primary-foreground/70">
+            <span className="flex items-center gap-2">
+              <BadgeCheck className="h-4 w-4 text-accent" /> Creator vetting on every campaign
+            </span>
+            <span className="flex items-center gap-2">
+              <Users className="h-4 w-4 text-accent" /> Nano to large creators
+            </span>
+            <span className="flex items-center gap-2">
+              <LineChart className="h-4 w-4 text-accent" /> Reporting you can check
+            </span>
+          </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      {/* Icon Row Section */}
-      <section id="features" className="py-12 bg-background">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
-            {[
-              { icon: Target, label: "Targeted Delivery", color: "text-accent" },
-              { icon: MapPin, label: "GPS-Tracked", color: "text-primary" },
-              { icon: Palette, label: "Design & Print", color: "text-accent" },
-              { icon: BarChart3, label: "Measurable Results", color: "text-primary" },
-            ].map((item) => (
-              <div key={item.label} className="flex flex-col items-center gap-3">
-                <div className="p-4 rounded-full bg-secondary">
-                  <item.icon className={`w-8 h-8 ${item.color}`} />
-                </div>
-                <span className="text-sm font-medium text-foreground">{item.label}</span>
+    {/* Intro */}
+    <Section
+      eyebrow="Who we are"
+      title="A creator network built for one audience, properly."
+      intro={
+        <>
+          Muslim consumers in the UK are a large, young and highly engaged market — and one that
+          notices when marketing gets the tone wrong. {BRAND.name} works with creators from inside
+          these communities, so your campaign arrives in a voice the audience already trusts.
+        </>
+      }
+    >
+      <div className="grid gap-4 md:grid-cols-3">
+        {CATEGORY_CARDS.map((c, i) => (
+          <Reveal key={c.slug} delay={i * 90}>
+            <Link
+              to={`/industries/${c.slug}`}
+              className="group relative block overflow-hidden rounded-2xl"
+            >
+              <img
+                src={c.image}
+                alt={`${c.title} creator content`}
+                loading="lazy"
+                className="h-72 w-full object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/25 to-transparent" />
+              <div className="absolute bottom-0 p-6 text-primary-foreground">
+                <h3 className="text-xl font-bold">{c.title}</h3>
+                <p className="mt-1 text-sm text-primary-foreground/80">{c.copy}</p>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
+            </Link>
+          </Reveal>
+        ))}
+      </div>
+      <div className="mt-8">
+        <Button asChild variant="outline">
+          <Link to="/industries">See all industries</Link>
+        </Button>
+      </div>
+    </Section>
 
-      {/* About Section */}
-      <section className="py-20 bg-secondary">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-4xl font-bold mb-6 text-foreground">
-              Why Local Businesses Choose NextGen Leaflets
-            </h2>
-            <p className="text-lg leading-relaxed text-muted-foreground">
-              We specialise in Paisley & Glasgow, helping businesses connect directly with their
-              communities. Unlike traditional leaflet companies, we combine reliable distribution
-              with digital tools like QR code tracking and email retargeting, so you don't just hope
-              your campaign worked—you can see the results.
-            </p>
-          </div>
-        </div>
-      </section>
+    {/* How it works */}
+    <Section
+      tone="muted"
+      eyebrow="How it works"
+      title="Five steps from brief to reporting."
+      align="center"
+    >
+      <div className="grid gap-4 md:grid-cols-3 lg:grid-cols-5">
+        {STEPS.map((s, i) => (
+          <Reveal key={s.title} delay={i * 80}>
+            <Card className="h-full p-6">
+              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-accent/10">
+                <s.icon className="h-5 w-5 text-accent" />
+              </div>
+              <p className="mt-5 text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+                Step {i + 1}
+              </p>
+              <h3 className="mt-2 text-lg font-semibold">{s.title}</h3>
+              <p className="mt-2 text-sm text-muted-foreground">{s.copy}</p>
+            </Card>
+          </Reveal>
+        ))}
+      </div>
+    </Section>
 
-      {/* Services Section */}
-      <section className="py-20">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold mb-4 text-foreground">Our Services</h2>
-            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-              From leaflet design to distribution and digital follow-ups, we provide a complete
-              marketing solution for local businesses.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-            <ServiceCard
-              icon={Navigation}
-              iconColor="text-primary"
-              title="Leaflet Distribution"
-              description="GPS-tracked & targeted delivery to ensure your leaflets reach the right hands."
-            />
-            <ServiceCard
-              icon={Palette}
-              iconColor="text-accent"
-              title="Design & Print"
-              description="Eye-catching leaflets professionally designed to represent your brand."
-            />
-            <ServiceCard
-              icon={Target}
-              iconColor="text-primary"
-              title="Geodemographic Targeting"
-              description="Deliver to the areas most likely to respond to your campaign."
-            />
-            <ServiceCard
-              icon={QrCode}
-              iconColor="text-accent"
-              title="QR Code Tracking"
-              description="Measure engagement and results with trackable QR codes."
-            />
-            <ServiceCard
-              icon={Mail}
-              iconColor="text-primary"
-              title="Email Retargeting"
-              description="Turn interest into repeat customers with follow-up campaigns."
-            />
-            <ServiceCard
-              icon={Settings}
-              iconColor="text-accent"
-              title="Custom Campaigns"
-              description="Tailored solutions designed around your specific business goals."
-            />
-          </div>
-
-          <div className="text-center">
-            <Button size="lg" onClick={scrollToPricing} className="px-8">
-              See Full Pricing
-            </Button>
-          </div>
-        </div>
-      </section>
-
-      {/* Pricing Section */}
-      <section id="pricing" className="py-20 bg-secondary">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold mb-4 text-foreground">
-              Packages Designed to Deliver Results
-            </h2>
-            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-              Flexible options to suit every business, whether you want exclusive delivery or a
-              shared round with other non-competing local businesses.
-            </p>
-          </div>
-
-          <PricingTable />
-        </div>
-      </section>
-
-      {/* Value Proposition Section */}
-      <section className="py-20">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-4xl font-bold mb-8 text-center text-foreground">
-              Why NextGen Leaflets Is Worth Every Penny
-            </h2>
-            <div className="grid md:grid-cols-2 gap-6">
-              {[
-                {
-                  icon: MapPin,
-                  title: "GPS-Tracked Delivery",
-                  description: "Know exactly where your leaflets go.",
-                },
-                {
-                  icon: Target,
-                  title: "Targeted Areas",
-                  description: "Reach households most likely to respond.",
-                },
-                {
-                  icon: Navigation,
-                  title: "Professional Team",
-                  description: "Reliable distributors who represent your brand well.",
-                },
-                {
-                  icon: Palette,
-                  title: "Design & Print Services",
-                  description: "High-quality, attention-grabbing leaflets.",
-                },
-                {
-                  icon: QrCode,
-                  title: "Digital Integration",
-                  description: "QR codes and email follow-ups for measurable results.",
-                },
-                {
-                  icon: MapPinned,
-                  title: "Local Expertise",
-                  description: "Deep knowledge of Paisley & Glasgow neighborhoods.",
-                },
-              ].map((item) => (
-                <div key={item.title} className="flex gap-4 items-start">
-                  <div className="p-3 rounded-lg bg-primary/10 shrink-0">
-                    <item.icon className="w-6 h-6 text-primary" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-lg mb-1 text-foreground">{item.title}</h3>
-                    <p className="text-muted-foreground">{item.description}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-            <div className="text-center mt-10">
-              <Button size="lg" onClick={scrollToContact} className="px-8">
-                Book Your Campaign Today
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonials Section */}
-      <section className="py-20 bg-secondary">
-        <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold mb-12 text-center text-foreground">
-            What Local Businesses Say About Us
-          </h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-            <TestimonialCard
-              quote="Our new coffee shop launch campaign was a huge success thanks to NextGen Leaflets. The GPS tracking gave us full confidence in the delivery, and we saw a clear rise in walk-ins during the first week!"
-              author="☕ Café Owner – Glasgow West End"
-            />
-            <TestimonialCard
-              quote="We picked specific residential areas to target, and it worked brilliantly. The team helped us design and print leaflets that stood out — we gained several new regular clients within days."
-              author="🧽 Cleaning Service – Paisley"
-            />
-            <TestimonialCard
-              quote="As a tutor, I needed to reach families nearby. The targeted leaflet campaign helped me fill all my available slots within two weeks. Amazing service!"
-              author="📚 Private Tutor – Glasgow Southside"
-            />
-            <TestimonialCard
-              quote="We'd tried leaflets before but never knew if they were actually delivered. With NextGen Leaflets, we could see every delivery on the GPS map. Professional and totally reliable."
-              author="💅 Beauty Salon – Renfrew"
-            />
-            <TestimonialCard
-              quote="We used their shared distribution option with other local businesses. It was affordable, and the QR tracking showed great engagement from the areas we wanted to target."
-              author="🏠 Real Estate Agency – Paisley"
-            />
-            <TestimonialCard
-              quote="The QR code tracking and email follow-ups made a big difference — we could see who was engaging with our offer. We'll definitely use NextGen Leaflets again."
-              author="🏋️‍♂️ Gym & Fitness Studio – Glasgow City Centre"
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* FAQ Section */}
-      <section className="py-20 bg-secondary">
-        <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold mb-12 text-center text-foreground">
-            💬 Frequently Asked Questions
-          </h2>
-          <div className="max-w-3xl mx-auto">
-            <Accordion type="single" collapsible className="space-y-4">
-              <AccordionItem value="item-1" className="bg-card border border-border rounded-lg px-6">
-                <AccordionTrigger className="text-left font-semibold hover:no-underline">
-                  What areas do you cover?
-                </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground">
-                  We specialise in London and Glasgow, offering reliable local distribution across all nearby neighbourhoods.
-                </AccordionContent>
-              </AccordionItem>
-
-              <AccordionItem value="item-2" className="bg-card border border-border rounded-lg px-6">
-                <AccordionTrigger className="text-left font-semibold hover:no-underline">
-                  How do I know my leaflets are actually being delivered?
-                </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground">
-                  Every campaign is GPS-tracked, and you'll receive a proof-of-delivery report so you can see exactly where your leaflets went.
-                </AccordionContent>
-              </AccordionItem>
-
-              <AccordionItem value="item-3" className="bg-card border border-border rounded-lg px-6">
-                <AccordionTrigger className="text-left font-semibold hover:no-underline">
-                  What's the difference between solo and shared distribution?
-                </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground">
-                  <p className="mb-2"><strong>Solo Distribution:</strong> Only your leaflet is delivered — perfect for maximum visibility.</p>
-                  <p><strong>Shared Distribution:</strong> Your leaflet goes out with up to three non-competing local businesses (e.g. salon, gym, café), making it more budget-friendly.</p>
-                </AccordionContent>
-              </AccordionItem>
-
-              <AccordionItem value="item-4" className="bg-card border border-border rounded-lg px-6">
-                <AccordionTrigger className="text-left font-semibold hover:no-underline">
-                  Can you help with leaflet design and printing?
-                </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground">
-                  Yes! We provide professional design and printing services to ensure your leaflets look sharp and attract attention.
-                </AccordionContent>
-              </AccordionItem>
-
-              <AccordionItem value="item-5" className="bg-card border border-border rounded-lg px-6">
-                <AccordionTrigger className="text-left font-semibold hover:no-underline">
-                  How does the QR code tracking work?
-                </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground">
-                  Each leaflet can include a unique QR code. When customers scan it, you can track engagement and follow up with email offers to boost conversions.
-                </AccordionContent>
-              </AccordionItem>
-
-              <AccordionItem value="item-6" className="bg-card border border-border rounded-lg px-6">
-                <AccordionTrigger className="text-left font-semibold hover:no-underline">
-                  What's the minimum quantity?
-                </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground">
-                  You can start from as little as 1,000 leaflets, with discounts available for larger campaigns.
-                </AccordionContent>
-              </AccordionItem>
-
-              <AccordionItem value="item-7" className="bg-card border border-border rounded-lg px-6">
-                <AccordionTrigger className="text-left font-semibold hover:no-underline">
-                  Can I target specific areas or audiences?
-                </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground">
-                  Absolutely. We use geo-demographic tools to identify the most relevant areas for your business — helping you reach the right people.
-                </AccordionContent>
-              </AccordionItem>
-
-              <AccordionItem value="item-8" className="bg-card border border-border rounded-lg px-6">
-                <AccordionTrigger className="text-left font-semibold hover:no-underline">
-                  How long does a campaign take?
-                </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground">
-                  Most campaigns are completed within 3–5 days once printing is ready.
-                </AccordionContent>
-              </AccordionItem>
-
-              <AccordionItem value="item-9" className="bg-card border border-border rounded-lg px-6">
-                <AccordionTrigger className="text-left font-semibold hover:no-underline">
-                  How do I get started?
-                </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground">
-                  Just request a free quote or book a consultation. We'll guide you through every step — from design to delivery and digital tracking.
-                </AccordionContent>
-              </AccordionItem>
-            </Accordion>
-          </div>
-        </div>
-      </section>
-
-      {/* Contact Section */}
-      <section id="contact" className="py-20">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold mb-4 text-foreground">
-              Ready to Grow Your Business Locally?
-            </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Let's design a campaign that gets your leaflets in the right hands—and your customers
-              through the door.
-            </p>
-          </div>
-
-          <ContactForm />
-
-          <div className="mt-12 text-center space-y-3">
-            <div className="flex items-center justify-center gap-2 text-muted-foreground">
-              <MapPinned className="w-5 h-5 text-primary" />
-              <span>Serving London & Glasgow</span>
-            </div>
-            <div className="flex items-center justify-center gap-2 text-muted-foreground">
-              <Phone className="w-5 h-5 text-accent" />
-              <a href="tel:07852555010" className="hover:text-primary transition-colors">
-                07852555010
-              </a>
-            </div>
-            <div className="flex items-center justify-center gap-2 text-muted-foreground">
-              <Mail className="w-5 h-5 text-primary" />
-              <a
-                href="mailto:omer@nextgenleaflets.co.uk"
-                className="hover:text-primary transition-colors"
+    {/* Services */}
+    <Section
+      eyebrow="Services"
+      title="Whatever level of support you need."
+      intro="Take the whole campaign off your hands, or just use us to find the right creators."
+    >
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        {SERVICES.map((s, i) => (
+          <Reveal key={s.slug} delay={i * 60}>
+            <Card className="flex h-full flex-col p-6 transition-shadow hover:shadow-[var(--shadow-lift)]">
+              <h3 className="text-lg font-semibold">{s.title}</h3>
+              <p className="mt-2 text-sm text-muted-foreground">{s.summary}</p>
+              <Link
+                to={`/services#${s.slug}`}
+                className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-accent hover:gap-2.5 transition-all"
               >
-                omer@nextgenleaflets.co.uk
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
+                Learn more <ArrowRight className="h-4 w-4" />
+              </Link>
+            </Card>
+          </Reveal>
+        ))}
+      </div>
+    </Section>
 
-      {/* Footer */}
-      <footer className="py-8 bg-foreground text-primary-foreground">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col items-center gap-4">
-            <img 
-              src={logofooter} 
-              alt="NextGen Leaflets" 
-              className="h-16 md:h-20"
-            />
-            <p className="text-sm">
-              © {new Date().getFullYear()} NextGen Leaflets. All rights reserved.
-            </p>
+    {/* Why us */}
+    <Section tone="ink" eyebrow="Why brands work with us" title="Specialists, not generalists.">
+      <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        {WHY.map((w) => (
+          <div key={w.title}>
+            <h3 className="text-lg font-semibold">{w.title}</h3>
+            <p className="mt-2 text-sm leading-relaxed text-primary-foreground/70">{w.copy}</p>
           </div>
+        ))}
+      </div>
+      <div className="mt-12">
+        <Button asChild size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90">
+          <Link to="/for-brands">See how we work with brands</Link>
+        </Button>
+      </div>
+    </Section>
+
+    {/* Industries strip */}
+    <Section tone="muted" eyebrow="Industries" title="Where we do our best work.">
+      <div className="flex flex-wrap gap-3">
+        {INDUSTRIES.map((ind) => (
+          <Link
+            key={ind.slug}
+            to={`/industries/${ind.slug}`}
+            className="rounded-full border border-border bg-card px-5 py-2.5 text-sm font-medium transition-colors hover:border-accent hover:text-accent"
+          >
+            {ind.title}
+          </Link>
+        ))}
+      </div>
+    </Section>
+
+    {/* FAQ */}
+    <Section eyebrow="FAQs" title="Common questions from brands">
+      <div className="max-w-3xl">
+        <Accordion type="single" collapsible className="space-y-3">
+          {BRAND_FAQS.slice(0, 8).map((f, i) => (
+            <AccordionItem
+              key={f.q}
+              value={`q${i}`}
+              className="rounded-xl border border-border bg-card px-5"
+            >
+              <AccordionTrigger className="text-left font-semibold hover:no-underline">
+                {f.q}
+              </AccordionTrigger>
+              <AccordionContent className="text-muted-foreground">{f.a}</AccordionContent>
+            </AccordionItem>
+          ))}
+        </Accordion>
+        <Button asChild variant="outline" className="mt-8">
+          <Link to="/faq">Read all FAQs</Link>
+        </Button>
+      </div>
+    </Section>
+
+    {/* Final CTA */}
+    <section className="section bg-[var(--gradient-emerald)] text-accent-foreground">
+      <div className="container mx-auto px-4 text-center">
+        <h2 className="mx-auto max-w-2xl text-3xl font-bold leading-tight md:text-5xl">
+          Ready to reach Muslim consumers properly?
+        </h2>
+        <p className="mx-auto mt-5 max-w-xl text-lg text-accent-foreground/80">
+          Tell us your objective and we will come back with a creator approach that fits it.
+        </p>
+        <div className="mt-9 flex flex-col justify-center gap-3 sm:flex-row">
+          <Button asChild size="lg" variant="secondary">
+            <Link to="/start-a-campaign">Start a Campaign</Link>
+          </Button>
+          <Button
+            asChild
+            size="lg"
+            variant="outline"
+            className="border-accent-foreground/40 bg-transparent text-accent-foreground hover:bg-accent-foreground/10"
+          >
+            <Link to="/creator-network">Explore the Creator Network</Link>
+          </Button>
         </div>
-      </footer>
-    </>
-  );
-};
+      </div>
+    </section>
+  </>
+);
 
 export default Index;
